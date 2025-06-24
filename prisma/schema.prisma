@@ -1,0 +1,61 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  id        Int                  @id @default(autoincrement())
+  name      String
+  email     String               @unique
+  password  String
+  role      Role                 @default(COMMON)
+  createdAt DateTime             @default(now())
+  updatedAt DateTime             @updatedAt
+  progress  UserExerciseStatus[]
+}
+
+model ListExercise {
+  id          Int        @id @default(autoincrement())
+  title       String
+  description String
+  createdAt   DateTime   @default(now())
+  updatedAT   DateTime   @updatedAt
+  exercises   Exercise[]
+}
+
+model Exercise {
+  id                Int                  @id @default(autoincrement())
+  title             String
+  subtitle          String?
+  description       String
+  functionSignature String
+  exemple           Json
+  testCases         Json
+  listaId           Int
+  lista             ListExercise         @relation(fields: [listaId], references: [id])
+  createdAt         DateTime             @default(now())
+  updatedAt         DateTime             @updatedAt
+  progress          UserExerciseStatus[]
+}
+
+model UserExerciseStatus {
+  id          Int       @id @default(autoincrement())
+  userId      Int
+  exerciseId  Int
+  status      String
+  attempts    Int       @default(0)
+  completedAt DateTime?
+  user        User      @relation(fields: [userId], references: [id])
+  exercise    Exercise  @relation(fields: [exerciseId], references: [id])
+
+  @@unique([userId, exerciseId])
+}
+
+enum Role {
+  ADMIN
+  COMMON
+}
