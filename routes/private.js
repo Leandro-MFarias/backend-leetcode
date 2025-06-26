@@ -1,22 +1,16 @@
 import express from "express";
-import { PrismaClient } from "@prisma/client";
 import { logoutSession } from "../utils/jwt.js";
+import { listExercise } from "./listExercise.js";
+import { getUserInfo } from "./user.js";
 
-const prisma = new PrismaClient();
+
 const router = express.Router();
 
-router.get("/", async (req, res) => {
-  try {
-    const listExercises = await prisma.listExercise.findMany();
+router.post("/logout", logoutSession);
 
-    res
-      .status(200)
-      .json({ message: "Dashboard acessado com Sucesso!!", listExercises });
-  } catch (error) {
-    res.status(500).json({ message: "Erro no Servidor" });
-  }
-});
+router.get("/listExercise", listExercise);
 
-router.post("/logout", logoutSession)
+router.get("/user", getUserInfo)
 
-export default router
+
+export default router;
