@@ -14,8 +14,7 @@ app.use(cors({ origin: "https://maisprati-leetcode.vercel.app", credentials: tru
 
 app.use(cookieParser())
 
-app.use("/", publicRoutes)
-app.use("/dashboard", auth, privateRoutes)
-
+app.use("/auth", publicRoutes)
+app.use("/", auth, privateRoutes)
 
 app.listen(PORT, () => console.log(`Servidor rodando na porta ${PORT}`))
