@@ -3,6 +3,7 @@ import jwt from "jsonwebtoken";
 const JWT_SECRET = process.env.JWT_SECRET;
 
 export function auth(req, res, next) {
+  console.log("🚨 Middleware auth chamado em:", req.path);
   const token = req.cookies.accessToken
 
   if (!token) {
