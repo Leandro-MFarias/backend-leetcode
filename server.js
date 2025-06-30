@@ -18,3 +18,6 @@ app.use("/", publicRoutes)
 app.use("/home", auth, privateRoutes)
 
 app.listen(PORT, () => console.log(`Servidor rodando na porta ${PORT}`))
+
+// https://maisprati-leetcode.vercel.app
+// http://localhost:3000
