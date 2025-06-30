@@ -6,7 +6,9 @@ import cors from "cors"
 import { auth } from "./middlewares/auth.js"
 import cookieParser from "cookie-parser"
 
+const PORT = process.env.PORT || 3333
 const app = express()
+
 app.use(express.json())
 app.use(cors({ origin: "https://maisprati-leetcode.vercel.app", credentials: true}))
 
@@ -15,6 +17,5 @@ app.use(cookieParser())
 app.use("/", publicRoutes)
 app.use("/", auth, privateRoutes)
 
-const PORT = process.env.PORT || 3333
 
 app.listen(PORT, () => console.log(`Servidor rodando na porta ${PORT}`))
