@@ -8,9 +8,11 @@ export async function listExercise(req, res) {
       select: {
         id: true,
         title: true,
-        description: true,
         exercises: {
-          select: { id: true },
+          select: {
+            id: true,
+            title: true,
+          },
         },
       },
     });

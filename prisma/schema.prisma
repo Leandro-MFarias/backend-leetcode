@@ -22,7 +22,7 @@ model ListExercise {
   id          Int        @id @default(autoincrement())
   title       String
   createdAt   DateTime   @default(now())
-  updatedAT   DateTime   @updatedAt
+  updatedAT   DateTime   @updatedAt // ATUALIZAR
   exercises   Exercise[]
 }
 
