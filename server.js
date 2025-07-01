@@ -1,6 +1,8 @@
 import express from "express";
 import publicRoutes from "./routes/public.js";
 import privateRoutes from "./routes/private.js";
+import testRoute from "./test.js"
+
 import cors from "cors";
 
 import { auth } from "./middlewares/auth.js";
@@ -22,6 +24,7 @@ app.use(
 app.use(cookieParser());
 
 app.use("/", publicRoutes);
+app.use("/test", testRoute);
 app.use("/home", auth, privateRoutes);
 
 app.listen(PORT, () => console.log(`Servidor rodando na porta ${PORT}`));
