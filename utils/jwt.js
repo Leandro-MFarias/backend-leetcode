@@ -1,7 +1,6 @@
 import jwt from "jsonwebtoken";
 
 const JWT_SECRET = process.env.JWT_SECRET;
-const isProduction = process.env.NODE_ENV === "production";
 
 export function generateAcessToken(user) {
   return jwt.sign({ id: user.id, role: user.role }, JWT_SECRET, {
@@ -16,15 +15,15 @@ export function createSessionCookies(res, user) {
 
   res.cookie("accessToken", accessToken, {
     httpOnly: true,
-    sameSite: isProduction ? "None" : "Lax",
-    secure: isProduction,
+    sameSite: "None",
+    secure: true,
     path: "/",
   });
 
   res.cookie("refreshToken", refreshToken, {
     httpOnly: true,
-    sameSite: isProduction ? "None" : "Lax",
-    secure: isProduction,
+    sameSite: "None",
+    secure: true,
     path: "/",
   });
 }
@@ -32,16 +31,16 @@ export function createSessionCookies(res, user) {
 export function logoutSession(req, res) {
   res.cookie("accessToken", null, {
     httpOnly: true,
-    sameSite: isProduction ? "None" : "Lax",
-    secure: isProduction,
+    sameSite: "None",
+    secure: true,
     path: "/",
     maxAge: 0,
   })
 
   res.cookie("refreshToken", null, {
     httpOnly: true,
-    sameSite: isProduction ? "None" : "Lax",
-    secure: isProduction,
+    sameSite: "None",
+    secure: true,
     path: "/",
     maxAge: 0,
   })
