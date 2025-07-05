@@ -15,32 +15,34 @@ export function createSessionCookies(res, user) {
 
   res.cookie("accessToken", accessToken, {
     httpOnly: true,
-    sameSite: "None",
-    secure: true,
+    sameSite: "Lax",
+    secure: false,
     path: "/",
+    maxAge: 7 * 24 * 60 * 60 * 1000,
   });
 
   res.cookie("refreshToken", refreshToken, {
     httpOnly: true,
-    sameSite: "None",
-    secure: true,
+    sameSite: "Lax",
+    secure: false,
     path: "/",
+    maxAge: 7 * 24 * 60 * 60 * 1000,
   });
 }
 
 export function logoutSession(req, res) {
   res.cookie("accessToken", null, {
     httpOnly: true,
-    sameSite: "None",
-    secure: true,
+    sameSite: "Lax",
+    secure: false,
     path: "/",
     maxAge: 0,
   })
 
   res.cookie("refreshToken", null, {
     httpOnly: true,
-    sameSite: "None",
-    secure: true,
+    sameSite: "Lax",
+    secure: false,
     path: "/",
     maxAge: 0,
   })

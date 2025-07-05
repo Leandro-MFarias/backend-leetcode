@@ -19,11 +19,11 @@ model User {
 }
 
 model ListExercise {
-  id          Int        @id @default(autoincrement())
-  title       String
-  createdAt   DateTime   @default(now())
-  updatedAT   DateTime   @updatedAt // ATUALIZAR
-  exercises   Exercise[]
+  id        Int        @id @default(autoincrement())
+  title     String
+  createdAt DateTime   @default(now())
+  updatedAT DateTime   @updatedAt // ATUALIZAR
+  exercises Exercise[]
 }
 
 model Exercise {
@@ -31,14 +31,24 @@ model Exercise {
   title             String
   subtitle          String?
   description       String
+  functionName      String
   functionSignature String
   exemple           Json
   testCases         Json
   listaId           Int
   lista             ListExercise         @relation(fields: [listaId], references: [id])
+  languageId        Int
+  language          Language             @relation(fields: [languageId], references: [id])
   createdAt         DateTime             @default(now())
   updatedAt         DateTime             @updatedAt
   progress          UserExerciseStatus[]
+}
+
+model Language {
+  id        Int        @id @default(autoincrement())
+  name      String
+  code      Int
+  exercises Exercise[]
 }
 
 model UserExerciseStatus {
