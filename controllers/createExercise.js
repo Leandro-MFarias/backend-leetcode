@@ -6,6 +6,7 @@ export async function createExercise(req, res) {
   try {
     const {
       title,
+      functionName,
       subtitle,
       description,
       functionSignature,
@@ -55,6 +56,7 @@ export async function createExercise(req, res) {
     await prisma.exercise.create({
       data: {
         title,
+        functionName,
         subtitle,
         description,
         exemple,
