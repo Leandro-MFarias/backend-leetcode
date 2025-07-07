@@ -11,6 +11,7 @@ export async function getExercise(req, res) {
       select: {
         id: true,
         title: true,
+        functionName: true,
         subtitle: true,
         description: true,
         functionSignature: true,
@@ -20,6 +21,12 @@ export async function getExercise(req, res) {
           select: {
             id: true,
             title: true,
+          },
+        },
+        language: {
+          select: {
+            name: true,
+            code: true,
           },
         },
         progress: true,
