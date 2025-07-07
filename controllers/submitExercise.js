@@ -16,7 +16,7 @@ export async function submitExercise(req, res) {
 
   try {
     const submission = await axios.post(
-      `${process.env.JUDGE0_API_URL}?wait=true`,
+      `${process.env.JUDGE0_API_URL}?wait=false`,
       {
         source_code: finalCase,
         language_id: languageId,
