@@ -23,6 +23,6 @@ app.use(
 app.use(cookieParser());
 
 app.use("/", publicRoutes);
-app.use("/home", auth, privateRoutes);
+app.use("/", auth, privateRoutes);
 
 app.listen(PORT, () => console.log(`Servidor rodando na porta ${PORT}`));
