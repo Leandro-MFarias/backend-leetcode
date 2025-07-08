@@ -9,14 +9,19 @@ export async function submitExercise(req, res) {
 
   const finalCase = `
 ${sourceCode}
+
+function normalize(str) {
+  return String(str).normalize("NFD").replace(/[\u0300-\u036f]/g, "").toLowerCase().trim()
+}
+
 function runTests() {
   const results = [];
   ${testCases
     .map(
       (t) =>
-        `results.push(${functionName}(${t.input}) === ${JSON.stringify(
-          t.expectedOutput
-        )});`
+        `results.push(normalize(${functionName}(${
+          t.input
+        })) === normalize(${JSON.stringify(t.expectedOutput)}));`
     )
     .join("\n")}
   console.log(JSON.stringify(results));
